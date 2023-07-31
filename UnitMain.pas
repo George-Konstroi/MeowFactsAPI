@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, REST.Types, Vcl.StdCtrls, REST.Client,
   Data.Bind.Components, Data.Bind.ObjectScope, System.JSON, Vcl.ExtCtrls,
-  Vcl.Imaging.pngimage;
+  Vcl.Imaging.pngimage, UnitSendEmail;
 
 type
   TForm3 = class(TForm)
@@ -30,9 +30,12 @@ type
     RESTResponseSendGrid: TRESTResponse;
     procedure ButtonRequestClick(Sender: TObject);
     procedure ButtonEnviarPorEmailClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     fact: string;
+    email: SendEmail;
   public
     { Public declarations }
   end;
@@ -46,8 +49,9 @@ implementation
 
 procedure TForm3.ButtonEnviarPorEmailClick(Sender: TObject);
 begin
+  fact := 'aaaaaaaaaaaaa';
   if EditEmail.Text <> '' then begin
-  
+    email.SendEmail(EditEmail.Text, fact);
   end;
 
 end;
@@ -65,6 +69,17 @@ begin
   fact := TJSONString(_json_array.Items[0]).Value;
 
   LabelResponse.Caption := fact;
+end;
+
+procedure TForm3.FormCreate(Sender: TObject);
+begin
+  email := SendEmail.Create;
+  email.CreateConection;
+end;
+
+procedure TForm3.FormDestroy(Sender: TObject);
+begin
+  email.Destroy;
 end;
 
 end.

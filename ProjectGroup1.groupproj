@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{F9B47E77-2955-4C99-8038-FDC53AF0D6B0}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ProjectMeowFacts.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\Desktop\windowsService\ClimaService.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ProjectMeowFacts">
+        <MSBuild Projects="ProjectMeowFacts.dproj"/>
+    </Target>
+    <Target Name="ProjectMeowFacts:Clean">
+        <MSBuild Projects="ProjectMeowFacts.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProjectMeowFacts:Make">
+        <MSBuild Projects="ProjectMeowFacts.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ClimaService">
+        <MSBuild Projects="..\..\Desktop\windowsService\ClimaService.dproj"/>
+    </Target>
+    <Target Name="ClimaService:Clean">
+        <MSBuild Projects="..\..\Desktop\windowsService\ClimaService.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ClimaService:Make">
+        <MSBuild Projects="..\..\Desktop\windowsService\ClimaService.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ProjectMeowFacts;ClimaService"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ProjectMeowFacts:Clean;ClimaService:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ProjectMeowFacts:Make;ClimaService:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

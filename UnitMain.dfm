@@ -11,6 +11,8 @@ object Form3: TForm3
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -196,7 +198,6 @@ object Form3: TForm3
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        ExplicitTop = 60
         ExplicitWidth = 281
       end
     end
